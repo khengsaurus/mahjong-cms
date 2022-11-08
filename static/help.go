@@ -1,0 +1,117 @@
+package static
+
+const HelpContent = `
+{
+    "sections": [
+        {
+            "title": "Basics of Mahjong",
+            "points": [
+                "Mahjong is a game where players take turns to draw and discard tiles.",
+                "Every round has a Prevailing Wind and players have their individual Seat Wind: the dealer is East (東) and other players are South (南), West (西), North (北), anti-clockwise around the table.",
+                "There are four rounds for each Prevailing Wind (East, South, West, North), and everyone takes turn to be the dealer as the game progresses.",
+                "The dealer starts with 14 tiles and is the first to discard.",
+                "The objective of the game is to form 'Melds', which can either be three consecutive tiles (Chi) or three or four of a kind (Pong/Kang).",
+                "_render_Chi:_1W,2W,3W,4T,5T,6T",
+                "_render_Pong:_2T,2T,2T,we,we,we",
+                "_render_Kang:_3S,3S,3S,3S,dh,dh,dh,dh",
+                "Players can only take tiles discarded by player's to their left to Chi, but can take any discarded tile to Pong, Kang, or Hu (win). Note that:<ul><li>Hu has priority over Pong/Kang and Chi</li><li>Pong/Kang has priority over Chi.</li></ul>",
+                "The points of each hand depends on the tiles it contains, and there are three main ways to gain points:<ul><li>Melding Dragon tiles, the Prevailing/Seat Winds</li><li>Having bonus tiles (see the Tiles section)</li><li>Certain combinations of melds/tiles (see the Scoring Hands section)</li></ul>",
+                "Players can only Hu (win) when they form a complete hand of 4 melds and a pair (eyes), or have a special combination of tiles, and their hand meets the minimum Tai (points) required.",
+                "If the dealer Hu's, the game will not proceed to the next round and the current dealer will be the dealer for the next round too.",
+                "If there are 15 tiles left and the last player to draw does not Hu, the round is drawn. If so, the game will only proceed to the next round if there was a Kang or someone drew matching bonus tiles."
+            ]
+        },
+        {
+            "title": "Tiles",
+            "points": [
+                "Suited tiles: there are three suits, each with tiles numbered 1 to 9, and four of each tile.",
+                "_render_Wan tiles:_1W,2W,3W,7W,8W,9W",
+                "_render_Tong tiles:_1T,2T,3T,7T,8T,9T",
+                "_render_Suo tiles:_1S,2S,3S,7S,8S,9S",
+                "Honour tiles: these comprise Wind and Dragon tiles, with four of each.",
+                "_render_Wind tiles:_we,ws,ww,wn",
+                "_render_Dragon tiles:_dh,db,df",
+                "Bonus tiles: these are made up of Animals, Seasons, and Flower tiles, with only one of each. Animals give 1 Tai while only players' respective Season and Flower tiles (based on Seat Wind) will give Tai.",
+                "_render_Animal tiles:_am,al,ag,ac",
+                "_render_Season tiles:_sc,sx,sq,sd",
+                "_render_Flower tiles:_fm,fl,fj,fz"
+            ]
+        },
+        {
+            "title": "Scoring Hands",
+            "points": [
+                "Ping Hu: hand comprises of Chi melds and a pair. The last tile cannot be unique unless it is self drawn, and the pair cannot be the Prevailing/Seat Winds, or any of the dragon tiles.<br/>1 Tai if the player has any bonus tiles, 4 Tai if not.",
+                "_render_6W,7W,8W,3S,4S,5S,7S,8S,9S,2T,3T,4T,9W,9W",
+                "All Pong hand: hand comprises of Pong/Kang melds and a pair (2 Tai)",
+                "_render_1S,1S,1S,3T,3T,3T,ws,ws,ws,dh,dh,dh,8W,8W",
+                "Half Suited: hand comprises of one suit and Honor tiles only (2 Tai)",
+                "_render_1T,1T,1T,2T,3T,4T,ws,ws,ws,dh,dh,dh,wn,wn",
+                "Suited: hand comprises of one suit only (4 Tai)",
+                "_render_1S,1S,1S,3S,4S,5S,6S,6S,6S,7S,8S,9S,9S,9S",
+                "All Honours: hand comprises of Honor tiles only (maximum Tai)",
+                "_render_we,we,we,ws,ws,ws,dh,dh,dh,db,db,db,wn,wn",
+                "Terminals: hand comprises of suited tiles numbered 1 and 9 only (maximum Tai)",
+                "_render_1W,1W,1W,1S,1S,1S,9S,9S,9S,1T,1T,1T,9T,9T",
+                "Mixed Honors and Terminals: hand comprises of Honor tiles and suited tiles numbered 1 and 9 only (2 Tai)",
+                "_render_we,we,we,db,db,db,1S,1S,1S,1T,1T,1T,9T,9T",
+                "Three Lesser Scholars: hand has Pong/Kang of two Dragons and a pair of the third Dragon (3 Tai)",
+                "_render_4W,4W,4W,4T,5T,6T,dh,dh,dh,db,db,db,df,df",
+                "Three Great Scholars: hand contains Pongs/Kangs of all three dragons. No additional meld or pair needed (maximum Tai)",
+                "_render_4W,6W,8W,8S,9S,dh,dh,dh,db,db,db,df,df,df",
+                "Four Lesser Blessings: hand has 3 Wind Pongs/Kangs and a pair of Wind tiles (2 Tai, plus Tai for melding the Prevailing/Seat Winds)",
+                "_render_4T,5T,6T,we,we,we,ws,ws,ws,ww,ww,ww,wn,wn",
+                "Four Greater Blessings: hand contains Pongs/Kangs of all four Winds (maximum Tai)",
+                "_render_we,we,we,ws,ws,ws,ww,ww,ww,wn,wn,wn,9S,9S",
+                "13 Orphans: hand contains one of each Honor tile, 1 and 9 of each Suit, and a pair with any of the other tiles (maximum Tai)",
+                "_render_1W,9W,1S,9S,1T,9T,we,ws,ww,wn,dh,db,df,df",
+                "Seven Pairs (maximum Tai)",
+                "_render_4W,4W,6W,6W,1T,1T,5T,5T,wn,wn,dh,dh,db,db",
+                "Pure Green: hand is completely green, i.e. can only be made up of 2, 3, 4, 6, 8 Suo tiles and the Green Dragon tile (maximum Tai)",
+                "_render_2S,2S,2S,2S,3S,4S,6S,6S,6S,df,df,df,8S,8S",
+                "Concealed Hand: player's hand must be fully hidden (no open meld) and the last tile must be self drawn (+1 Tai)",
+                "Completing a Bonus Tile set will also award additional Tai: all four Animals (maximum Tai), Seasons (+1 Tai), Flowers (+1 Tai), or all Seasons and Flowers (maximum Tai)",
+                "Certain scenarios will also award Tai:<ul><li>Hu on the first replacement tile: Hu on the replacement tile after drawing a bonus tile/Kang (+1 Tai)</li><li>Hu on the second replacement tile: drawing a bonus tile as a replacement tile or Kang a replacement tile, then drawing another replacement tile to Hu (maximum Tai)</li><li>Hu on the last tile: drawing the 16th last tile of the deck to Hu (+1 Tai)</li><li>Robbing the Kang: player B Kang's and player A Hu's with that tile (+1 Tai)</li></ul>",
+                "The following scoring scenarios are not accounted for:<ul><li>Nine Gates (九蓮寶燈)</li><li>Three Winners (一炮三响)</li><li>Hidden Treasure (四暗刻/坎坎胡)</li><li>Heavenly, Earthly and Humanly Hands (天胡, 地胡, 人胡)</li><li>Scenario where the guilty person pays for all (包)</li></ul>"
+            ]
+        },
+        {
+            "title": "Controls",
+            "points": [
+                "When you can take or Hu on a discarded tile, a popup will appear showing you the options. Alternatively, you can select the tiles in your hand and press on the bottom-left button.",
+                "You can Kang if you select 4 of the same tile in your hand, or 1 tile when you've already Pong'd it. You can only do this after you've drawn or taken a tile, during your turn.",
+                "The Draw (摸) or Discard (丢) button on the right will light up only when it's your turn. Note that you must draw or take a tile before discarding, and only during your turn.",
+                "Replacement tiles (補花) will be automatically drawn for you when you Kang or draw flower tiles.",
+                "After drawing the last tile, the bottom-right button will read '完'. The last player has to press on it to end the round. If anyone tries to draw replacement tiles (補花) and there are 15 tiles left, the game will also end in a draw."
+            ],
+            "ps": ""
+        },
+        {
+            "title": "Gameplay",
+            "points": [
+                "A glowing flower tile indicates that it is the player's flower tile, i.e. +1 Tai.",
+                "There will only be instant payouts in Shooter or Half Shooter games, when a user Kang's, draws matching flower tiles, or collects a full flower set.",
+                "The 'Waiting...' alert will show when someone can Pong, Kang, or Hu on a discarded tile. The default timeout is 6s.",
+                "The timeout will be 12s if more than one person can take a discarded tile. The player with priority will have the first 6s to take the it. If they don't, others can take it after the first 6s."
+            ]
+        },
+        {
+            "title": "How to Hu",
+            "points": [
+                "You will not be able to Hu if you do not meet the minimum Tai. The maximum Tai you can set is 5.",
+                "When you can Hu, a popup will appear giving you the option. If can Hu on a tile you draw, a button (开) will appear in the bottom right. After pressing that, a second one (开!) will appear on the left. Press on that to declare Hu.",
+                "Upon pressing the second button, your tiles will be shown to everyone, and no one can perform any actions. If you close the popup, you will hide your hand and the game will resume (careful ah - if a bot is next, it will play immediately).",
+                "When you Hu, the {platform} will automatically put the last discarded tile next to your hand if you haven't drawn a tile and it is available. If you cancel the Hu it will be returned to whoever discarded it. There is no fake-hu (詐胡) functionality."
+            ]
+        },
+        {
+            "title": "End of the round/game",
+            "points": [
+                "If the game draws, it will progress onto the next round if there was a Kang or someone drew matching flower tiles. If not, the round will be repeated.",
+                "After the round ends, if the next dealer is a person, only that person will see the 'Next Round' button in the popup.",
+                "If the next dealer is an AI, only the creator will see the 'Next Round' button, and subsequently the 'Start Round' button to start the round",
+                "Games will be deleted after 24 hours of inactivity, regardless of whether they are still ongoing or not."
+            ]
+        }
+    ]
+}
+`

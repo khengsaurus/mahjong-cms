@@ -2,8 +2,8 @@ package static
 
 const NotifsContent = `
 {
-    "notifs": {
-        "0": ""
-    }
+    "latestIOSVersion": 2.1,
+    "latestAndVersion": 2.59,
+    "notifs": []
 }
 `

@@ -13,8 +13,9 @@ import (
 const defaultPort = "8080"
 
 var (
-	route_test = "/test"
-	route_mj   = "/mj"
+	route_test    = "/test"
+	route_content = "/mj"
+	route_counter = "/counter"
 )
 
 func main() {
@@ -27,7 +28,8 @@ func main() {
 	router.Use(middlewares.EnableCors)
 
 	router.HandleFunc(route_test, test)
-	router.Route(route_mj, controllers.MahjongContent)
+	router.Get(route_counter, controllers.GetCount)
+	router.Route(route_content, controllers.MahjongContent)
 	router.HandleFunc("/*", others)
 
 	fmt.Printf("Server listening at port %s\n", port)

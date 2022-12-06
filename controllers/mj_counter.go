@@ -10,7 +10,7 @@ import (
 	"github.com/khengsaurus/mahjong-cms/utils"
 )
 
-const last_checked_count = 20_000
+const last_checked_count = 21_000
 const counter_url = "https://firestore.googleapis.com/v1/projects/mahjong-sg/databases/(default)/documents/metrics/local-counter"
 
 type BadgeIOPayload struct {
